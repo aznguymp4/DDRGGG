@@ -11,7 +11,6 @@ module.exports = {
   decompress: code => code.match(new RegExp(`\\W[${quantityChars}]?`,'g')).map(set => {
     if(set.length===1) return codeToGhost[set]
     if(set.length!==2) return '' // Invalid Length
-    console.log(set)
     const [code_, quantity] = set.split('')
     return codeToGhost[code_].repeat(quantityMark.indexOf(quantity))
   }).filter(Boolean).join('')
