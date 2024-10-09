@@ -27,10 +27,16 @@ app.get('/decompress/:ghost',
 	res.json(gc.decompress(ghost))
 })
 
-app.get('/:gauge',
-bqv.checkGhost,
-(req, res) => {
-	const ghost = (req.query.g || gc.decompress(req.query.x)).split('').map(x=>+x)
+
+
+app.get('/:gauge/x/:compressedGhost', (req, res, next) => {
+	req.params.ghost = gc.decompress(req.params.compressedGhost)
+	next()
+}, renderGauge)
+app.get('/:gauge/g/:ghost', renderGauge)
+
+function renderGauge(req, res) {
+	const ghost = req.params.ghost.split('').map(x=>+x)
 	const gaugeKey = req.params.gauge.toLowerCase()
 	const gauge = vars.gauges[gaugeKey]
 	const colors = Object.values(vars.judgeColors)
@@ -113,7 +119,7 @@ bqv.checkGhost,
 
 	res.setHeader('Content-Type', 'image/png')
 	res.end(cvs.toBuffer('image/png'))
-})
+}
 
 // Error formatter
 app.use((err, _req, res, _next) => {

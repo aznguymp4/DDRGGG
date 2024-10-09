@@ -20,7 +20,7 @@ const handleValidationErrors = (req, _res, next) => {
 
 module.exports = {
   checkGhost: [
-		query('g')
+		param('ghost')
 			.optional()
 			// .exists(falsy).withMessage('ghost is required')
 			.matches(/^[0123567]{1,}$/).withMessage('ghost must only contain these numbers: 0, 1, 2, 3, 5, 6, 7'),
