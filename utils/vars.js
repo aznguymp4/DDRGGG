@@ -165,7 +165,7 @@ module.exports = {
     },
   },
   imageConfig: {
-    minWidth: 1920,
+    minWidth: 1200,
     height: 540,
     judgementBarHeight: 64
   }

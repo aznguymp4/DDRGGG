@@ -1,6 +1,7 @@
 const express = require('express')
 const { createCanvas, registerFont } = require('canvas')
 const bqv = require('./utils/bodyQueryValidators')
+const gc = require('./utils/ghostCompress')
 const vars = require('./utils/vars')
 const app = express()
 
@@ -13,10 +14,23 @@ app.use((req, res, next) => {
 	next()
 })
 
-app.get('/:gauge/:ghost',
+app.get('/compress/:ghost',
+// bqv.checkGhost,
+(req, res) => {
+	const { ghost } = req.params
+	res.json(gc.compress(ghost))
+})
+app.get('/decompress/:ghost',
+// bqv.checkGhost,
+(req, res) => {
+	const { ghost } = req.params
+	res.json(gc.decompress(ghost))
+})
+
+app.get('/:gauge',
 bqv.checkGhost,
 (req, res) => {
-	const ghost = req.params.ghost.split('').map(x=>+x)
+	const ghost = (req.query.g || gc.decompress(req.query.x)).split('').map(x=>+x)
 	const gaugeKey = req.params.gauge.toLowerCase()
 	const gauge = vars.gauges[gaugeKey]
 	const colors = Object.values(vars.judgeColors)
@@ -80,7 +94,7 @@ bqv.checkGhost,
 		ctx.textAlign = "left"
 		ctx.font = `${graphH*.1}px ShinGo`
 		{
-			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.0125, graphH*.9422]
+			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.02, graphH*.9422]
 			ctx.strokeText(...textDrawParams)
 			ctx.fillText(...textDrawParams)
 		}
@@ -97,6 +111,7 @@ bqv.checkGhost,
 		)
 	})
 
+	res.setHeader('Content-Type', 'image/png')
 	res.end(cvs.toBuffer('image/png'))
 })
 
