@@ -9,25 +9,21 @@ registerFont('./fonts/ATTFShinGoProHeavy.ttf', { family: 'ShinGo', weight: 600 }
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-	console.log(`\x1b[33m${req.rawHeaders[1]} - \x1b[36m${req.method} \x1b[90m${req.path}\x1b[0m`)
-	next()
-})
+// app.use((req, res, next) => {
+// 	console.log(`\x1b[33m${req.rawHeaders[1]} - \x1b[36m${req.method} \x1b[90m${req.path}\x1b[0m`)
+// 	next()
+// })
 
-app.get('/compress/:ghost',
-// bqv.checkGhost,
+app.post('/compress',
 (req, res) => {
-	const { ghost } = req.params
+	const { ghost } = req.body
 	res.json(gc.compress(ghost))
 })
-app.get('/decompress/:ghost',
-// bqv.checkGhost,
+app.post('/decompress',
 (req, res) => {
-	const { ghost } = req.params
-	res.json(gc.decompress(ghost))
+	const { text } = req.body
+	res.json(gc.decompress(text))
 })
-
-
 
 app.get('/:gauge/x/:compressedGhost', (req, res, next) => {
 	req.params.ghost = gc.decompress(req.params.compressedGhost)
