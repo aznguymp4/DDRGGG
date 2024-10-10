@@ -80,23 +80,23 @@ function renderGauge(req, res) {
 		ctx.stroke()
 	
 		// Graph X lines (again, but with percentages this time)
+		ctx.textAlign = "left"
 		for(let i=1;i<gauge.xLines;i++) {
 			const lineYpos = graphH*(i/gauge.xLines)
 			ctx.fillStyle = "#00000030"
 			ctx.fillRect(0,lineYpos-2,w,4)
 			ctx.font = `${graphH*.035}px ShinGo`
 			ctx.fillStyle = "#00000080"
-			if(lineYpos < graphH*.85) ctx.fillText(Math.round((1-(i/gauge.xLines))*100)+"%", graphH*.008, lineYpos-(graphH*.01))
+			if(lineYpos < graphH*.85) ctx.fillText(Math.round((1-(i/gauge.xLines))*100)+"%", graphH*.01, lineYpos-(graphH*.01))
 		}
 	
 		// Gauge Name Text
 		ctx.strokeStyle = "#00000080"
 		ctx.fillStyle = "#ffffffaa"
-		ctx.lineWidth = h*.018
-		ctx.textAlign = "left"
-		ctx.font = `${graphH*.1}px ShinGo`
+		ctx.lineWidth = h*.02
+		ctx.font = `${graphH*.17}px ShinGo`
 		{
-			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.02, graphH*.9422]
+			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.035, graphH*.893]
 			ctx.strokeText(...textDrawParams)
 			ctx.fillText(...textDrawParams)
 		}
