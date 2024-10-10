@@ -115,7 +115,7 @@ module.exports = {
       name: "Flare IX",
       xLines: 10
     },
-    flarex: {
+    flare10: {
       gain: [0, -100,-200,-1000, 0, -3000,   0, -3000],
       initVal: 10000,
       bgGradient: [[0,"F97C7F"],[.05,"FF7FAA"],[.1,"EB7DFA"],[.165,"937FFF"],[.215,"5AC5FF"],[.29,"65FFE3"],[.36,"5DEE5E"],[.45,"E3EC75"],[.55,"E3EC75"],[.64,"5DEE5E"],[.71,"65FFE3"],[.785,"5AC5FF"],[.835,"937FFF"],[.9,"EB7DFA"],[.95,"FF7FAA"],[1,"F97C7F"]],
@@ -140,12 +140,12 @@ module.exports = {
       xLines: 8
     },
     risky:  {
-      gain: [0,    0,   0,    0, 0,-10000,   0,-10000],
-      initVal: 10000,
+      gain: [0,    0,   0,    0, 0, -2500,   0, -2500],
+      initVal: 2500,
       bgGradient: [[0,"FFB046"], [.5,"FF4900"], [1,"C60000"]],
       gradientAngled: true,
       name: "RISKY",
-      xLines: 1
+      xLines: 4
     },
     normal: {
       gain: [10000/43, 10000/44, 10000/45, 0, 0, -10000/12, 0, -10000/20],
