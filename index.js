@@ -87,7 +87,7 @@ function renderGauge(req, res) {
 			ctx.fillRect(0,lineYpos-2,w,4)
 			ctx.font = `${graphH*.035}px ShinGo`
 			ctx.fillStyle = "#00000080"
-			if(lineYpos < graphH*.85) ctx.fillText(Math.round((1-(i/gauge.xLines))*100)+"%", graphH*.01, lineYpos-(graphH*.01))
+			ctx.fillText(Math.round((1-(i/gauge.xLines))*100)+"%", graphH*.01, lineYpos-(graphH*.01))
 		}
 	
 		// Gauge Name Text
