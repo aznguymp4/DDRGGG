@@ -60,7 +60,7 @@ module.exports = {
       xLines: 5
     },
     flare3: {
-      gain: [0,    0, -12,  -75, 0,  -450,   0,  -450],
+      gain: [0,    0, -10,  -75, 0,  -450,   0,  -450],
       initVal: 10000,
       bgGradient: [[0,"5bf677"], [1,"0abc28"]],
       gradientAngled: false,
