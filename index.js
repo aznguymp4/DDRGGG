@@ -91,12 +91,22 @@ function renderGauge(req, res) {
 		}
 	
 		// Gauge Name Text
-		ctx.strokeStyle = "#00000080"
-		ctx.fillStyle = "#ffffffaa"
-		ctx.lineWidth = h*.02
+		ctx.fillStyle = "#ffffffdd"
+		ctx.strokeStyle = "#00000090"
+		ctx.lineWidth = graphH*.031
 		ctx.font = `${graphH*.17}px ShinGo`
 		{
-			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.035, graphH*.893]
+			const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.035, graphH*(gauge.showRemainPercent? .85 : .90)]
+			ctx.strokeText(...textDrawParams)
+			ctx.fillText(...textDrawParams)
+		}
+		// Remaining % text
+		if(gauge.showRemainPercent) {
+			ctx.fillStyle = "#b8b8b8dd"
+			ctx.strokeStyle = "#00000080"
+			ctx.lineWidth = graphH*.017
+			ctx.font = `${graphH*.07}px ShinGo`
+			const textDrawParams = [`Remaining HP: ${(Math.max(0,gaugeVal)*.01).toFixed(2)}%`, vars.imageConfig.minWidth*.035, graphH*.96]
 			ctx.strokeText(...textDrawParams)
 			ctx.fillText(...textDrawParams)
 		}
