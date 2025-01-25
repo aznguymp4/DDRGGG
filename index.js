@@ -109,7 +109,7 @@ function renderGauge(req, res) {
 			ctx.strokeStyle = "#00000080"
 			ctx.lineWidth = graphH*.017
 			ctx.font = `${graphH*.07}px ShinGo`
-			const textDrawParams = [`Remaining HP: ${(Math.max(0,gaugeVal)*.01).toFixed(2)}%`, vars.imageConfig.minWidth*.035, graphH*.96]
+			const textDrawParams = [`Remaining Gauge: ${(Math.max(0,gaugeVal)*.01).toFixed(2)}%`, vars.imageConfig.minWidth*.035, graphH*.96]
 			ctx.strokeText(...textDrawParams)
 			ctx.fillText(...textDrawParams)
 		}
