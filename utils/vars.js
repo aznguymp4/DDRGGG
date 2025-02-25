@@ -186,6 +186,7 @@ module.exports = {
   imageConfig: {
     minWidth: 1920,
     height: 480,
-    judgementBarHeight: 50
+    judgementBarHeight: 35,
+    combineGap: 15
   }
 }
