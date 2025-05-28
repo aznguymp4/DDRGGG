@@ -33,8 +33,15 @@ app.get('/:gauge/g/:ghost', renderGauge)
 
 function renderGauge(req, res) {
 	// Indicates if the URL is being accessed by a human in the browser or by Discord's proxy media embed bot
-	// const botAccessing = Boolean(req.headers['user-agent']?.match(/discordbot/gi))
-	// if(!botAccessing) return res.status(307).redirect(`https://replay.aznguy.com/${req.url.split('/')[3]}`)
+	const botAccessing = Boolean(req.headers['user-agent']?.match(/discordbot/gi))
+	if(!botAccessing) {
+		// return res.status(307).redirect(`https://replay.aznguy.com/${req.url.split('/')[3]}`)
+		const { bn,df } = req.query
+		res.setHeader('Content-Type', 'text/html')
+		const musicPage = `https://573.aznguy.com/music/${bn}?view=${vars.difficultyToView[parseInt(df)]}`
+		return res.send(`<body><meta http-equiv="refresh" content="0; URL='${musicPage}'"/></body>`)
+	}
+
 	const ghost = req.params.ghost.split('').map(x=>+x)
 	const canvases = []
 

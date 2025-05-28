@@ -1,4 +1,5 @@
 module.exports = {
+  difficultyToView: ['bSP','BSP','DSP','ESP','CSP','BDP','DDP','EDP','CDP'],
   judgeColors: {
     mv: "#ddddff",
     pf: "#ffff22",
