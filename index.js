@@ -6,6 +6,7 @@ const vars = require('./utils/vars')
 const app = express()
 
 registerFont('./fonts/ATTFShinGoProHeavy.ttf', { family: 'ShinGo', weight: 600 })
+const fontFallbacks = "ShinGo, A-TTF Shin Go Pro H"
 
 app.use(express.json());
 
@@ -98,7 +99,7 @@ function renderGauge(req, res) {
 				const lineYpos = graphH*(i/gauge.xLines)
 				ctx.fillStyle = "#00000030"
 				ctx.fillRect(0,lineYpos-2,w,4)
-				ctx.font = `${graphH*.035}px ShinGo`
+				ctx.font = `${graphH*.035}px ${fontFallbacks}`
 				ctx.fillStyle = "#00000080"
 				ctx.fillText(Math.round((1-(i/gauge.xLines))*100)+"%", graphH*.01, lineYpos-(graphH*.01))
 			}
@@ -107,7 +108,7 @@ function renderGauge(req, res) {
 			ctx.fillStyle = "#ffffffdd"
 			ctx.strokeStyle = "#00000090"
 			ctx.lineWidth = graphH*.031
-			ctx.font = `${graphH*.17}px ShinGo`
+			ctx.font = `${graphH*.17}px ${fontFallbacks}`
 			{
 				const textDrawParams = [gauge.name, vars.imageConfig.minWidth*.035, graphH*(gauge.showRemainPercent? .85 : .90)]
 				ctx.strokeText(...textDrawParams)
@@ -118,7 +119,7 @@ function renderGauge(req, res) {
 				ctx.fillStyle = "#b8b8b8dd"
 				ctx.strokeStyle = "#00000080"
 				ctx.lineWidth = graphH*.017
-				ctx.font = `${graphH*.07}px ShinGo`
+				ctx.font = `${graphH*.07}px ${fontFallbacks}`
 				const textDrawParams = [`Remaining Gauge: ${(Math.max(0,gaugeVal)*.01).toFixed(2)}%`, vars.imageConfig.minWidth*.035, graphH*.96]
 				ctx.strokeText(...textDrawParams)
 				ctx.fillText(...textDrawParams)
